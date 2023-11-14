@@ -1,7 +1,13 @@
 const fs = require('fs');
 const { db } = require('../db/db');
 
-const sqlQuery = fs.readFileSync('./db/query.sql', 'utf-8').split(';')[2];
+const sqlQuery = `SELECT
+r.title,
+r.salary,
+d.name AS department
+    FROM roles r
+        JOIN departments d   
+            ON r.department_id = d.id; `;
 
 function viewRoles (callback) {
     // Get the table the user is looking for in the database
